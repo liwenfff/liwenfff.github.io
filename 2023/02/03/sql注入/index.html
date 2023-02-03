@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>sql注入 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.SQL注入是一种常见的Web安全漏洞，主要形成的原因是：后台服务器接收相关参数未经过滤直接带入数据库查询2.sql语法中引号是必须成对出现的否则就会报错。引号没有成对出现时，我们要构造语句将引号进行闭合。3.Sql注入漏洞危害（1）数据库信息泄漏。（2）网页篡改。（3）网站被挂马，传播恶意软件。（4）数据库被恶意操作（5）服务器被远程控制，被安装后门（6）破坏硬盘数据，瘫痪全系统4.挖掘sql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql注入">
+<meta property="og:url" content="http://example.com/2023/02/03/sql%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.SQL注入是一种常见的Web安全漏洞，主要形成的原因是：后台服务器接收相关参数未经过滤直接带入数据库查询2.sql语法中引号是必须成对出现的否则就会报错。引号没有成对出现时，我们要构造语句将引号进行闭合。3.Sql注入漏洞危害（1）数据库信息泄漏。（2）网页篡改。（3）网站被挂马，传播恶意软件。（4）数据库被恶意操作（5）服务器被远程控制，被安装后门（6）破坏硬盘数据，瘫痪全系统4.挖掘sql">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/02/03/sql%E6%B3%A8%E5%85%A5/1.jpg">
+<meta property="og:image" content="http://example.com/2023/02/03/sql%E6%B3%A8%E5%85%A5/2.jpg">
+<meta property="article:published_time" content="2023-02-03T07:31:57.000Z">
+<meta property="article:modified_time" content="2023-02-03T07:43:10.444Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/02/03/sql%E6%B3%A8%E5%85%A5/1.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-sql注入" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/03/sql%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time class="dt-published" datetime="2023-02-03T07:31:57.000Z" itemprop="datePublished">2023-02-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      sql注入
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1.SQL注入是一种常见的Web安全漏洞，主要形成的原因是：后台服务器接收相关参数未经过滤直接带入数据库查询<br>2.sql语法中引号是必须成对出现的否则就会报错。引号没有成对出现时，我们要构造语句将引号进行闭合。<br>3.Sql注入漏洞危害<br>（1）数据库信息泄漏。<br>（2）网页篡改。<br>（3）网站被挂马，传播恶意软件。<br>（4）数据库被恶意操作<br>（5）服务器被远程控制，被安装后门<br>（6）破坏硬盘数据，瘫痪全系统<br>4.挖掘sql注入漏洞<br>（1）url中GET型传参，如？id&#x3D;1</p>
+<img src="/2023/02/03/sql%E6%B3%A8%E5%85%A5/1.jpg" class>
+<p>（2）搜索框，前端将用户输入的数据代入到数据库中进行查询，这种以POST方法进行发送数据</p>
+<img src="/2023/02/03/sql%E6%B3%A8%E5%85%A5/2.jpg" class>
+<p>（3）是HTTP请求头部字段如Cookie值<br>5.漏洞探测：需要我们用burp截取查询的数据包，找到传参的变量然后在其后面加上单引号、双引号等如下payload进行测试</p>
+<p>#判断如下闭合方式是否会报错，会报错则肯定存在注入<br>&#x3D;test’<br>&#x3D;test”<br>#若不报错则判断是否存在布尔盲注，如果页面会有不同的显示在可能存在漏洞<br>&#x3D;test’ and -1&#x3D;-1 or ‘<br>&#x3D;test’ and -1&#x3D;-2 or ‘  </p>
+<p>&#x3D;test” and -1&#x3D;-1 or “<br>&#x3D;test” and -1&#x3D;-2 or “<br>（1）get型：进行url编码，在url中进行测试payload需要先进行url编码。不进行编码的话，也可以用+代替空格，#代替–+ 。%23代表#，也是注释符<br>（2）Post型：可以用上面的方法进行编码，或者使用+代替空格，也可以不使用<br>6.参数类型分类<br>（1）数字型：当输入的参数为整形时，如果存在注入漏洞，可以认为是数字型注入。<br>（2）字符型：当输入的参数被当做字符串时，称为字符型。字符型和数字型最大的一个区别在于，数字型不需要单引号来闭合，而字符串一般需要通过引号来闭合的。即看参数是否被引号包裹<br>7.注入手法分类<br>（1）联合查询(union注入)：联合查询适合于有显示位的注入，即页面某个位置会根据我们输入的数据的变化而变化<br>（2）报错注入：group by 重复键冲、extractvalue() 函数、updatexml() 函数<br>（3）基于布尔的盲注步骤</p>
+<ol>
+<li>判断数据库类型 2. 判断当前数据库名 3. 判断当前库的表名 4. 判断表的字段 5. 爆字段中的数据<br>（4）基于时间的盲注</li>
+<li>延时注入 2. 获取数据库名字 3.数据库名字第二个字母的判断<br>（5）HTTP头注入<br> 1.User-Agent注入  2.cookie注入  3.Referer注入  4。X-Forwarded-For 注入<br>（6）宽字节注入<br>（7）堆叠查询<br>（8）二阶注入</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/03/sql%E6%B3%A8%E5%85%A5/" data-id="cldo7zbn300008ou89apj2b0k" data-title="sql注入" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/01/28/php%E5%AD%A6%E4%B9%A02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">php学习2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/03/sql%E6%B3%A8%E5%85%A5/">sql注入</a>
+          </li>
+        
+          <li>
+            <a href="/2023/01/28/php%E5%AD%A6%E4%B9%A02/">php学习2</a>
+          </li>
+        
+          <li>
+            <a href="/2022/12/31/php%E5%AD%A6%E4%B9%A0/">php学习</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/21/%E6%8A%80%E6%9C%AF%E9%9A%8F%E6%83%B3/">技术随想</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/20/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
